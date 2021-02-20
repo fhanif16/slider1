@@ -35,10 +35,8 @@ const getImages = (query) => {
     .then(response => response.json())
     .then(data => showImages(data.hits))
     .catch(error => {
-      console.log("not found");
       
      
-  
     })
     
     toggleSpinner();
