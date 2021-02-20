@@ -29,34 +29,38 @@ const showImages = (images) => {
 }
 
 const getImages = (query) => {
-  
-    toggleSpinner();
+
+  toggleSpinner();
   fetch(`https://pixabay.com/api/?key=${KEY}=${query}&image_type=photo&pretty=true`)
     .then(response => response.json())
     .then(data => showImages(data.hits))
-    .catch(error => {
-      
-     
+    .catch(err => {
+
+
     })
-    
-    toggleSpinner();
+
+
+
+  toggleSpinner();
 
 }
+
 
 let slideIndex = 0;
 const selectItem = (event, img) => {
   let element = event.target;
   element.classList.add('added');
- 
+
   let item = sliders.indexOf(img);
   if (item === -1) {
     sliders.push(img);
+
   } else {
     delete sliders[item];
     element.classList.toggle('added');
 
-   
-    
+
+
   }
 }
 var timer
@@ -65,7 +69,10 @@ const createSlider = () => {
   if (sliders.length < 2) {
     alert('Select at least 2 image.')
     return;
+
   }
+
+
   // crate slider previous next area
   sliderContainer.innerHTML = '';
   const prevNext = document.createElement('div');
@@ -80,24 +87,24 @@ const createSlider = () => {
   // hide image aria
   imagesArea.style.display = 'none';
   const duration = document.getElementById('duration').value || 1000;
-  if( duration>=1000){
-  sliders.forEach(slide => {
-    let item = document.createElement('div')
-    item.className = "slider-item";
-    item.innerHTML = `<img class="w-100"
+  if (duration >= 1000) {
+    sliders.forEach(slide => {
+      let item = document.createElement('div')
+      item.className = "slider-item";
+      item.innerHTML = `<img class="w-100"
     src="${slide}"
     alt="">`;
-    sliderContainer.appendChild(item)
-  })
-  changeSlide(0)
-  timer = setInterval(function () {
-    slideIndex++;
-    changeSlide(slideIndex);
-  }, duration);
-}
-else{
-  alert('change your duration time, it has to be at least 1000');
-}
+      sliderContainer.appendChild(item)
+    })
+    changeSlide(0)
+    timer = setInterval(function () {
+      slideIndex++;
+      changeSlide(slideIndex);
+    }, duration);
+  }
+  else {
+    alert('change your duration time, it has to be at least 1000');
+  }
 }
 
 
@@ -150,10 +157,10 @@ document.getElementById("duration").addEventListener('keyup', function (press) {
   }
 });
 
-const toggleSpinner =() =>{
+const toggleSpinner = () => {
   const spinner = document.getElementById("loading-spinner");
- 
- spinner.classList.toggle("d-none");
- }
+
+  spinner.classList.toggle("d-none");
+}
 
 
